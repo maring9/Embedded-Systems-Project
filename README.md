@@ -41,4 +41,6 @@ Use Case
 This project is more of an example of a proof-of-concept for image processing and computer vision, which could be adapted for real world use (for example in robotics or autonomous driving). The main components and concepts still apply to real world problems, the main difference being in the neural network model and the need of additional components.
 
 
-For
+For more information read the following document: 
+
+https://docs.google.com/document/d/1gppiM_NYEqbhNMjnled6vkdeFPl8RXiGxe36y9DEL4Y/edit?usp=sharing
