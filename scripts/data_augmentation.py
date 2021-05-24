@@ -181,7 +181,7 @@ def main():
 
     # Applying the augmentations to the green light images and saving them on the disk
     augment_images(folder = green_light_augmented_dir, augmenter = augmenter,
-                   images=green_light_images, size = (128, 128),
+                   images=green_light_images, size = (224, 224),
                    start_index = 0, iterations = 25)
 
     print('Done. Images augmented successfully.')

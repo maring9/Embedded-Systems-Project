@@ -178,7 +178,14 @@ def convert_model_to_lite(original_model_path, lite_model_path):
     # Saving the tensorflow lite model
     with open(os.path.join(lite_model_path, 'lite_model.tflite'), 'wb') as f:
         f.write(lite_model)
-    
+
+
+def process(image,label):
+    """Function to normalize image in [0, 1] range
+    """
+    image = tf.cast(image/255. ,tf.float32)
+    return image,label
+
 
 def main():
 
@@ -198,8 +205,8 @@ def main():
         os.mkdir(r'D:\Proiect SI\Dataset')
     
     # Moving the augmented images directories into the dataset directory
-    dest = shutil.move(r'D:\Proiect SI\Green Light Augmented', r'D:\Proiect SI\Dataset')
-    dest2 = shutil.move(r'D:\Proiect SI\Red Light Augmented', r'D:\Proiect SI\Dataset' )
+    # dest = shutil.move(r'D:\Proiect SI\Green Light Augmented', r'D:\Proiect SI\Dataset')
+    # dest2 = shutil.move(r'D:\Proiect SI\Red Light Augmented', r'D:\Proiect SI\Dataset' )
 
    
 
@@ -213,6 +220,9 @@ def main():
     # Preparing dataset for the model
     train_dataset = prepare_dataset(dataset_path, 'training', 0.2)
     validation_dataset = prepare_dataset(dataset_path, 'validation', 0.2)
+
+    train_dataset = train_dataset.map(process)
+    validation_dataset = validation_dataset.map(process)
 
     print('Training model...')
 
