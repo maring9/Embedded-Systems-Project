@@ -14,7 +14,7 @@ def preprocess_input(input_image):
     """Function to preprocess the input image as expected by the model
 
     Args:
-        input_image (cv2.Image): Input image read from camera
+        input_image (np.array): Input image read from camera
 
     Returns:
         np.array: Tensor as expected by the model
@@ -64,7 +64,7 @@ def run_inference(interpreter, input_tensor):
         input_tensor (np.array): Tensor of rank 4 to run the inference on
 
     Returns:
-        np.array: Categorical vector containing the output from the model
+        np.array: Probability vector containing the output from the model
     """
 
     # Input and output details from the model

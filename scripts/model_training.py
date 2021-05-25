@@ -82,24 +82,6 @@ def create_and_compile_model(input_shape=(224, 224, 3)):
     return model
 
 
-def create_data_generator(rescale= 1./255):
-    """Function that creates a data generator. 
-       In our case we only need normalization, the images are already
-       augmented.
-       Other transformation can be applied.
-
-    Args:
-        rescale (float, optional): Used to normalize the images. Defaults to 1./255.
-
-    Returns:
-        [tensorflow.python.keras.preprocessing.image.ImageDataGenerator
-        ]: Applies transformation to the images
-    """
-    data_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=rescale)
-
-    return data_generator
-
-
 def prepare_dataset(dataset_path, subset, validation_split, image_size=(224, 224)):
     """Function to prepare the dataset for the model
 
@@ -204,23 +186,12 @@ def main():
     if not os.path.isdir(r'D:\Proiect SI\Dataset'):
         os.mkdir(r'D:\Proiect SI\Dataset')
     
-    # Moving the augmented images directories into the dataset directory
-    # dest = shutil.move(r'D:\Proiect SI\Green Light Augmented', r'D:\Proiect SI\Dataset')
-    # dest2 = shutil.move(r'D:\Proiect SI\Red Light Augmented', r'D:\Proiect SI\Dataset' )
-
-   
-
-    # Creating the training data generator that normalize the input images in the range [0, 1]
-    train_datagen = create_data_generator()
-
-    # Creating the validation data generator that normalize the input images in the range [0, 1]
-    validation_datagen = create_data_generator()
-
 
     # Preparing dataset for the model
     train_dataset = prepare_dataset(dataset_path, 'training', 0.2)
     validation_dataset = prepare_dataset(dataset_path, 'validation', 0.2)
 
+    # Normalize dataset to [0, 1]
     train_dataset = train_dataset.map(process)
     validation_dataset = validation_dataset.map(process)
 
